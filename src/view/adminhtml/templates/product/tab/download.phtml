@@ -1,0 +1,47 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// phpcs:ignoreFile
+
+/** @var \Sebwite\ProductDownloads\Block\Adminhtml\Product\Edit\Tab\Download $block  */
+/** @var \Magento\Framework\Escaper $escaper */
+
+$_readonly = $block->isReadonly() ? ' disabled="disabled"' : '';
+$downloads = $block->getDownloads();
+?>
+
+<fieldset class="fieldset form-inline">
+    <legend class="legend"><span><?= $escaper->escapeHtml(__('Product Downloads')) ?></span></legend>
+    <p><?= __('Allowed Filetypes'); ?>: <?= /* @noEscape */ $block->getExtensions(); ?></p>
+    <br />
+    <div id="table_downloads">
+        <?php for($i = 0; $i < 10; $i++): ?>
+            <?php $fileIndex = $i + 1; ?>
+
+            <div class="field">
+                <label class="label" for="product_download_<?= $escaper->escapeHtmlAttr($fileIndex); ?>">
+                    <span><?= $escaper->escapeHtml(__('File')) . ' ' . $fileIndex ?></span>
+                </label>
+
+                <div class="control">
+                    <?php if (isset($downloads[$i])): ?>
+                    <a href="<?= $escaper->escapeUrl($block->getDownloadUrl($downloads[$i])); ?>" target="_BLANK">
+                        <?= /* @noEscape */ $downloads[$i]['download_file']; ?>
+                    </a>
+                     - 
+                    <a href="<?= $escaper->escapeUrl($block->getDeleteUrl($downloads[$i]['download_id'])); ?>">
+                        <?= $escaper->escapeHtml(__('Remove')); ?>
+                    </a>
+                <?php else: ?>
+                    <input type="file" id="product_download_<?= $escaper->escapeHtmlAttr($fileIndex); ?>" name="downloads[]" value="1" />
+                <?php endif; ?>
+                </div>
+            </div>
+
+        <?php endfor; ?>
+    </div>
+    <!-- #table_downloads -->
+</fieldset>

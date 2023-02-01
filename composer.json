@@ -1,0 +1,26 @@
+{
+  "name": "augustash/module-sebwite-product-downloads",
+  "description": "Magento 2.0 product download module",
+  "type": "magento2-module",
+  "license": [
+    "OSL-3.0",
+    "AFL-3.0"
+  ],
+  "version": "3.0.0",
+  "require": {
+    "php": ">=8.1",
+    "magento/framework": ">=103.0",
+    "magento/module-backend": "*",
+    "magento/module-store": "*",
+    "magento/module-catalog": "*",
+    "magento/module-widget": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Sebwite\\ProductDownloads\\": "src/"
+    },
+    "files": [
+      "src/registration.php"
+    ]
+  }
+}
